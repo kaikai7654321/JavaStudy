@@ -6,7 +6,14 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+/**
+ * BIO, 客户端
+ * 
+ * @author kaikai
+ *
+ */
 public class TimeClient {
+	private final static String QUERY_ORDER = "QUERY TIME ORDER";
 
 	public static void main(String[] args) {
 		int port = 8080;
@@ -29,7 +36,7 @@ public class TimeClient {
 			// true的意义？
 			out = new PrintWriter(socket.getOutputStream(), true);
 
-			out.println("QUERY TIME ORDER");
+			out.println(QUERY_ORDER);
 			System.out.println("send order 2 server succeed.");
 			String resp = in.readLine();
 			System.out.println("Now is : " + resp);

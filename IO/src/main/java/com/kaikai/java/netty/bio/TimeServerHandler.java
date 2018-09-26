@@ -7,7 +7,14 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Date;
 
+/**
+ * 业务类，执行后天的业务。
+ * 
+ * @author kaikai
+ *
+ */
 public class TimeServerHandler implements Runnable {
+	private final static String QUERY_ORDER = "QUERY TIME ORDER";
 	private Socket socket;
 
 	TimeServerHandler(Socket socket) {
@@ -29,8 +36,7 @@ public class TimeServerHandler implements Runnable {
 					break;
 				}
 				System.out.println("The time server receive order : " + body);
-				currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body)
-						? new Date(System.currentTimeMillis()).toString()
+				currentTime = QUERY_ORDER.equalsIgnoreCase(body) ? new Date(System.currentTimeMillis()).toString()
 						: "BAD ORDER";
 				out.println(currentTime);
 			}
@@ -53,7 +59,6 @@ public class TimeServerHandler implements Runnable {
 				try {
 					this.socket.close();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				this.socket = null;
