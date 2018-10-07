@@ -81,6 +81,7 @@ public class MultiplexerTimeServer implements Runnable {
 		// is closed, or its selector is closed.
 		if (key.isValid()) {
 			// 拿到的key有两种可能，acceptable和readable;准确说不止这两种可能，但是这里我们只关心这两种。
+			// 也就是key如果是acceptable，那么就需要使用serverSocketChannel, isReadable,就是用channel，
 			if (key.isAcceptable()) {
 				ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
 				SocketChannel sc = ssc.accept();
@@ -103,12 +104,15 @@ public class MultiplexerTimeServer implements Runnable {
 					String currentTime = QUERY_ORDER.equalsIgnoreCase(body)
 							? new Date(System.currentTimeMillis()).toString()
 							: "BAD ORDER";
+					// 为什么这里不判断isWritable();
 					doWrite(sc, currentTime);
 
 				} else if (readBytes < 0) {
+					// read()返回-1表示通道内的数据已经读完。如果返回0，表示没有读到东西这个时候。
 					key.cancel();
 					sc.close();
 				} else {
+					// 0说明channel里面的数据都读取了，但是还可以能有别的。while循环在上面。
 					// 为什么读取0byte要区别对待
 				}
 

@@ -1,7 +1,7 @@
-package com.kaikai.java.netty.nio;
+package com.kaikai.java.netty.aio;
 
 /**
- * NIO, Netty权威指南。 这里的read和write都是建立在，client发送信息十分短的基础上。如果真实的，应该读取整句话。
+ * AIO, Netty权威指南。 这里的read和write都是建立在，client发送信息十分短的基础上。如果真实的，应该读取整句话。
  * 
  * @author kaikai
  *
@@ -18,9 +18,9 @@ public class TimeServer {
 				// 使用默认值，什么都不需要写。只是为了捕捉异常
 			}
 		}
-		MultiplexerTimeServer multiplexerTimeServer = new MultiplexerTimeServer(port);
 
-		new Thread(multiplexerTimeServer, "NIO-MultiplexerTimeServer-001").start();
+		AysncTimeServerHandler timeServer = new AysncTimeServerHandler(port);
+		new Thread(timeServer, "AIO-AsyncTimeServerHandler-001").start();
 
 	}
 
