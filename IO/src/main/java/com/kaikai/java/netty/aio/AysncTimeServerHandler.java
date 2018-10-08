@@ -8,6 +8,9 @@ import java.util.concurrent.CountDownLatch;
 public class AysncTimeServerHandler implements Runnable {
 
 	private int port;
+	// latch是为了这个现场不退出。如果报错就退出，不报错就不退出。在服务器上不用，因为一般都有
+	// 一个主程序，不需要额外启动线程。另外，也不是这里就不需要额外线程，其实本质还是多线程，但是
+	// 不需要开发者管了。这也是M:0的原因
 	CountDownLatch latch;
 	AsynchronousServerSocketChannel serverChannel;
 

@@ -42,7 +42,7 @@ public class ReadCompletionHandler implements CompletionHandler<Integer, ByteBuf
 			writeBuffer.put(bytes);
 
 			writeBuffer.flip();
-
+			// 第二个buffer是attachment，但是没什么用，不传也可以。
 			channel.write(writeBuffer, writeBuffer, new CompletionHandler<Integer, ByteBuffer>() {
 
 				@Override

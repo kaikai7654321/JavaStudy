@@ -8,6 +8,12 @@ import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * 三个complete，其实就是把server的read和handler和到一起。一个handler，一个读，一个写
+ * 
+ * @author kaikai
+ *
+ */
 public class AsyncTimeClientHandler implements CompletionHandler<Void, AsyncTimeClientHandler>, Runnable {
 
 	private String host;
@@ -33,7 +39,6 @@ public class AsyncTimeClientHandler implements CompletionHandler<Void, AsyncTime
 		try {
 			latch.await();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {

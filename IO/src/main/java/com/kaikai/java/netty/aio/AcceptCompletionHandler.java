@@ -20,6 +20,7 @@ public class AcceptCompletionHandler implements CompletionHandler<AsynchronousSo
 	@Override
 	public void failed(Throwable exc, AysncTimeServerHandler attachment) {
 		exc.printStackTrace();
+		// 这个意思没有搞明白
 		attachment.latch.countDown();
 	}
 
