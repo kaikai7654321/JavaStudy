@@ -29,5 +29,6 @@
   	<module>ConcurentProgram</module>
   	<module>SpringInAction</module>
     <module>IO</module>
+    <module>MQ</module>
   </modules>
 </project>
